@@ -11,23 +11,27 @@ import "./style.css";
 class RepositoryList extends Component<Props> {
   componentDidMount() {
     const { loadRequest } = this.props;
-    loadRequest();
+    loadRequest("users/diego3g/repos");
   }
 
   render() {
     const { repositories } = this.props;
     return (
-      <ul>
-        {repositories.map((repository) => (
-          <li>{repository.owner.html_url}</li>
-        ))}
-      </ul>
+      <div>
+        <ul>
+          {repositories.map((repository) => (
+            <li key={repository.id}>{repository.owner.html_url}</li>
+          ))}
+        </ul>
+        <p>Url: {this.props.url}</p>
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
   repositories: state.repositories.data,
+  url: state.repositories.url,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>

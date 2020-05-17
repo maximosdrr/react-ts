@@ -2,10 +2,11 @@ import { Repository } from "../../store/ducks/repositories/types";
 
 interface StateProps {
   repositories: Repository[];
+  url: string;
 }
 
 interface DispatchProps {
-  loadRequest(): void;
+  loadRequest(url: any): void;
 }
 
 interface OwnProps {}

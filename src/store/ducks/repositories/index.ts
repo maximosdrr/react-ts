@@ -5,12 +5,15 @@ const INITIAL_STATE: RepositoriesState = {
   data: [],
   error: false,
   loading: false,
+  url: "",
 };
 
 const reducer: Reducer<RepositoriesState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case RepositoryTypes.SET_REPO_URL:
+      return { ...state, url: action.payload.url };
     case RepositoryTypes.LOAD_REQUEST:
-      return { ...state, loading: true };
+      return { ...state, loading: true, url: action.payload.url };
     case RepositoryTypes.LOAD_SUCCESS:
       return {
         ...state,
