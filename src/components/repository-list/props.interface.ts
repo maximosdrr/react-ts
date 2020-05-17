@@ -7,6 +7,7 @@ interface StateProps {
 
 interface DispatchProps {
   loadRequest(url: any): void;
+  setRepoUrl(url: string): void;
 }
 
 interface OwnProps {}

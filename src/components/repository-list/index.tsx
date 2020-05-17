@@ -11,11 +11,13 @@ import "./style.css";
 class RepositoryList extends Component<Props> {
   componentDidMount() {
     const { loadRequest } = this.props;
-    loadRequest("users/diego3g/repos");
+    loadRequest(this.props.url);
   }
 
   render() {
     const { repositories } = this.props;
+    const { loadRequest, setRepoUrl } = this.props;
+    const search = () => loadRequest(this.props.url);
     return (
       <div>
         <ul>
@@ -24,6 +26,13 @@ class RepositoryList extends Component<Props> {
           ))}
         </ul>
         <p>Url: {this.props.url}</p>
+        <input
+          placeholder="Type your repo name"
+          onChange={(e) => {
+            setRepoUrl(e.target.value);
+          }}
+        ></input>
+        <button onClick={search}>maximosdrr</button>
       </div>
     );
   }
