@@ -7,6 +7,8 @@ import { Props } from "./props.interface";
 import * as RepositoriesActions from "../../store/ducks/repositories/actions";
 
 import "./style.css";
+import { Repository } from "../../store/ducks/repositories/types";
+import RepositoryItem from "../repository-item";
 
 class RepositoryList extends Component<Props> {
   componentDidMount() {
@@ -19,20 +21,26 @@ class RepositoryList extends Component<Props> {
     const { loadRequest, setRepoUrl } = this.props;
     const search = () => loadRequest(this.props.url);
     return (
-      <div>
-        <ul>
-          {repositories.map((repository) => (
-            <li key={repository.id}>{repository.owner.html_url}</li>
+      <div className="main-content">
+        <img
+          src="http://pngimg.com/uploads/github/github_PNG20.png"
+          width={250}
+          height={200}
+        ></img>
+        <div className="input-content">
+          <input
+            placeholder="Type your github username"
+            onChange={(e) => {
+              setRepoUrl(e.target.value);
+            }}
+          ></input>
+          <button onClick={search}>Search</button>
+        </div>
+        <div>
+          {repositories.map((repository: Repository) => (
+            <RepositoryItem repository={repository}></RepositoryItem>
           ))}
-        </ul>
-        <p>Url: {this.props.url}</p>
-        <input
-          placeholder="Type your repo name"
-          onChange={(e) => {
-            setRepoUrl(e.target.value);
-          }}
-        ></input>
-        <button onClick={search}>maximosdrr</button>
+        </div>
       </div>
     );
   }
